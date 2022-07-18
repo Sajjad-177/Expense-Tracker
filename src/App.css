@@ -1,0 +1,11 @@
+.income {
+    width: 50%;
+    border: 1px solid rgb(141, 231, 7);
+    border-right: 10px solid rgb(141, 231, 7);
+}
+
+.expense {
+    width:  50%;
+    border: 1px solid red;
+    border-right: 10px solid red;
+}
