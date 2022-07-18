@@ -1,5 +1,5 @@
 import './App.css';
-
+import Amounts from './Amounts';
 import History from './History';
 import Add_Txn_Form from './Add_Txn_Form';
 import { useState } from 'react';
@@ -9,10 +9,19 @@ const App = () => {
     const [totExpense, setTotExpense] = useState(0.0)
     const [history, setHistory] = useState([])
 
+    // useEffect(() => {
+    //     setTotIncome(JSON.parse(window.sessionStorage.getItem("income")));
+    //     setTotExpense(JSON.parse(window.sessionStorage.getItem("expense")));
+    //     setHistory(JSON.parse(window.sessionStorage.getItem("history")));
+    // }, [])
+
+    // useEffect(() => window.sessionStorage.setItem("income", totIncome), [totIncome])
+    // useEffect(() => window.sessionStorage.setItem("expense", totExpense), [totExpense])
+    // useEffect(() => window.sessionStorage.setItem("history", history), [history])
+
     const handleFormSubmit = (txn) => {
         const amount = parseFloat(txn["amount"])
 
-        if(Number.isNaN(amount)) { alert("Empty Field!!"); return; }
         if(amount == 0) { alert("zero amount not allowed!"); return; }
         if(amount < 0 && (-1 * amount ) > totIncome - totExpense) {console.log(amount,typeof(totExpense),totExpense, typeof(totIncome),totIncome); alert("Not enough balance!!"); return; }
         
@@ -27,12 +36,13 @@ const App = () => {
 
     return (
         <div className="App">
-            <h1>Expense Tracker</h1>
+            <h1 id="title">Expense Tracker</h1>
 
-            <div>
-                <h3>Balance</h3>
-                <p>${totIncome - totExpense}</p>
+            <div id="balance">
+                <h3>YOUR BALANCE</h3>
+                <p><em>$ </em>{totIncome - totExpense}</p>
             </div>
+            <Amounts income={totIncome} expense={totExpense} />
             <History history={history}/>
             <Add_Txn_Form handleFormSubmit={handleFormSubmit}/>
         </div>

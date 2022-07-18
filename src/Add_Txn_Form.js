@@ -13,26 +13,30 @@ const Add_Txn_Form = ({handleFormSubmit}) => {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        handleFormSubmit(formData)
+
+        if((formData["amount"])=="" || formData["remark"]=="") 
+            alert("Empty field!!");
+        else
+            handleFormSubmit(formData);
+    
         setFormData({...formData, "remark": "", "amount": "" })
     }
     
     return (
-        <form onSubmit={handleSubmit}>
-            <h3>Add Transaction</h3>
+        <form onSubmit={handleSubmit} id="txn-form">
+            <h3 className="border-btm">ADD TRANSACTION</h3>
 
             <div>
                 <label>Remark</label>
-                <input type="text" name="remark" onChange={handleChange} value={formData["remark"]} placeholder="Enter a remark"/>
+                <input type="text" name="remark" className="blue-shadow" onChange={handleChange} value={formData["remark"]} placeholder="Enter a remark..."/>
             </div>
 
             <div>
-                <label>Amount</label>
-                <label>(Negative - Expense, Positive - Income)</label>
-                <input type="number" name="amount" onChange={handleChange} value={formData["amount"]} placeholder="Enter amount"/>
+                <label>Amount ( Negative - Expense, Positive - Income )</label>
+                <input type="number" name="amount" className="blue-shadow" onChange={handleChange} value={formData["amount"]} placeholder="Enter amount..."/>
             </div>
 
-            <input type="submit" value="Add Transaction" />
+            <input type="submit" value="Add Transaction" id="submit-btn"/>
         </form>
     )
 }
